@@ -25,7 +25,8 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#goal-calc" class="nav-link">Goal Planner</a></li>
+                <li><a href="About Us.html" class="nav-link">About Us</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="https://radhekrishnafinancialhub.investwell.app/app/#/login" target="_blank" class="btn-login ripple">Login</a></li>
@@ -35,7 +36,6 @@
 
     <header id="home" class="hero">
         <canvas id="particle-canvas"></canvas>
-        
         <div class="floating-icon icon-1"><i class="fas fa-rupee-sign"></i></div>
         <div class="floating-icon icon-2"><i class="fas fa-chart-pie"></i></div>
         <div class="floating-icon icon-3"><i class="fas fa-shield-alt"></i></div>
@@ -71,7 +71,6 @@
                                 <input type="number" id="investInput" value="5000">
                             </div>
                         </div>
-
                         <div class="input-group">
                             <label>Expected Return (P.A. %)</label>
                             <div class="range-wrapper">
@@ -79,7 +78,6 @@
                                 <input type="number" id="rateInput" value="12">
                             </div>
                         </div>
-
                         <div class="input-group">
                             <label>Time Period (Years)</label>
                             <div class="range-wrapper">
@@ -88,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="chart-container">
                         <canvas id="myChart"></canvas>
                     </div>
@@ -97,15 +94,15 @@
                 <div class="result-box">
                     <div class="result-item">
                         <small>Invested</small>
-                        <span id="investedAmount">₹ 6,00,000</span>
+                        <span id="investedAmount">₹ 0</span>
                     </div>
                     <div class="result-item">
                         <small>Profit</small>
-                        <span id="estReturns" class="profit">₹ 5,61,695</span>
+                        <span id="estReturns" class="profit">₹ 0</span>
                     </div>
                     <div class="result-item total">
                         <small>Total Value</small>
-                        <span id="totalValue">₹ 11,61,695</span>
+                        <span id="totalValue">₹ 0</span>
                     </div>
                 </div>
             </div>
@@ -132,24 +129,60 @@
         </div>
     </section>
 
-    <section id="about" class="section">
+    <section id="goal-calc" class="section bg-light">
         <div class="container">
-            <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
-                <div class="about-text hidden-left">
-                    <h2 style="color: var(--primary); font-size: 2.2rem; margin-bottom: 20px;">About Us</h2>
-                    <p style="margin-bottom: 15px; line-height: 1.8;">Welcome to <strong>Radhe Krishna Financial Hub</strong>, founded by <strong>Ashok Kumar Goyal</strong>. We are a premier AMFI-registered Mutual Fund distribution firm dedicated to helping families build lasting wealth.</p>
-                    <p style="margin-bottom: 15px; line-height: 1.8;">With over 15 years of experience in the financial markets, we specialize in providing personalized investment strategies through Mutual Funds, SIPs, and Insurance planning. Our mission is to simplify investing and make high-quality financial advice accessible to everyone.</p>
-                    <ul style="list-style: none; margin-top: 20px;">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Professional Portfolio Management</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Goal-Based Financial Planning</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i> Completely Paperless Process</li>
-                    </ul>
-                </div>
-                <div class="about-image hidden-right" style="text-align: center;">
-                    <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 40px; border-radius: 30px; color: var(--white);">
-                        <i class="fas fa-user-tie" style="font-size: 5rem; margin-bottom: 15px;"></i>
-                        <h3>Ashok Kumar Goyal</h3>
-                        <p>Founder & Financial Consultant</p>
+            <div class="section-title hidden-up">
+                <h2>Calculate Your Goals</h2>
+                <p>Plan your dreams with precision financial engineering.</p>
+            </div>
+            
+            <div class="goal-wrapper hidden-up" style="max-width: 900px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 20px; box-shadow: var(--shadow);">
+                <div class="goal-grid">
+                    <div class="goal-inputs">
+                        <div class="input-group-modern" style="margin-bottom: 20px;">
+                            <input type="number" id="userAge" placeholder=" " required>
+                            <label>What is your age?</label>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 20px;">
+                            <label style="font-size: 0.8rem; font-weight: 600; color: #555;">Are you working?</label>
+                            <select id="isWorking" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; outline: none;">
+                                <option value="yes">Yes, Salaried/Business</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="input-group-modern" style="margin-bottom: 20px;">
+                            <input type="number" id="userSalary" placeholder=" " required>
+                            <label>Estimated Monthly Income (₹)</label>
+                        </div>
+                        <div class="input-group-modern" style="margin-bottom: 20px;">
+                            <input type="number" id="goalAmount" placeholder=" " required value="10000000">
+                            <label>Goal Cost (e.g., 1Cr = 10000000)</label>
+                        </div>
+                        <div class="input-group-modern" style="margin-bottom: 20px;">
+                            <input type="number" id="goalYears" placeholder=" " required value="5">
+                            <label>In how many years?</label>
+                        </div>
+                        <button onclick="calculateGoalSIP()" class="btn-primary full-width ripple shine-effect" style="border: none;">Calculate My Path</button>
+                    </div>
+
+                    <div id="goal-result-panel" class="goal-output glass-effect" style="padding: 30px; border-radius: 15px; background: #f0f4f8; display: flex; flex-direction: column; justify-content: center; border: 1px solid #e0e6ed;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px; text-align: center;">Investment Plan</h4>
+                        <div class="goal-stat" style="margin-bottom: 20px; text-align: center;">
+                            <small style="color: #666; font-size: 0.8rem; display: block;">Required Monthly SIP</small>
+                            <h2 id="requiredSIP" style="color: var(--secondary); font-size: 2rem;">₹ 0</h2>
+                        </div>
+                        <div style="border-top: 1px solid #ddd; padding-top: 15px;">
+                            <p style="font-size: 0.85rem; display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Total Invested:</span> <strong id="goalTotalInvested">₹ 0</strong>
+                            </p>
+                            <p style="font-size: 0.85rem; display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>Estimated Gain:</span> <strong id="goalGain" class="profit">₹ 0</strong>
+                            </p>
+                            <p style="font-size: 0.85rem; display: flex; justify-content: space-between;">
+                                <span>Target Wealth:</span> <strong id="goalFinal">₹ 0</strong>
+                            </p>
+                        </div>
+                        <p id="salaryWarning" style="color: #dc3545; font-size: 0.75rem; margin-top: 15px; display: none;">* This SIP is > 50% of your income. Consider increasing the target years.</p>
                     </div>
                 </div>
             </div>
@@ -163,26 +196,10 @@
                 <p>We deliver best in class financial services tailored to your needs.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card hidden-up">
-                    <div class="icon-box"><i class="fas fa-bell"></i></div>
-                    <h3>Timely Reminders</h3>
-                    <p>Get timely reminders of all your important dates so you never miss a premium.</p>
-                </div>
-                <div class="feature-card hidden-up" style="transition-delay: 0.1s;">
-                    <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Secure Environment</h3>
-                    <p>Bank grade security for all your financial transactions and data privacy.</p>
-                </div>
-                <div class="feature-card hidden-up" style="transition-delay: 0.2s;">
-                    <div class="icon-box"><i class="fas fa-users"></i></div>
-                    <h3>Family Account</h3>
-                    <p>One dashboard for all your family members to track investments together.</p>
-                </div>
-                <div class="feature-card hidden-up" style="transition-delay: 0.3s;">
-                    <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
-                    <h3>Consolidated View</h3>
-                    <p>View all investments, insurance, and external mutual funds in one report.</p>
-                </div>
+                <div class="feature-card hidden-up"><div class="icon-box"><i class="fas fa-bell"></i></div><h3>Timely Reminders</h3><p>Never miss a premium with our alert system.</p></div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.1s;"><div class="icon-box"><i class="fas fa-shield-alt"></i></div><h3>Secure Environment</h3><p>Bank grade security for your data.</p></div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.2s;"><div class="icon-box"><i class="fas fa-users"></i></div><h3>Family Account</h3><p>One dashboard for the whole family.</p></div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.3s;"><div class="icon-box"><i class="fas fa-file-invoice"></i></div><h3>Consolidated View</h3><p>View all investments in one report.</p></div>
             </div>
         </div>
     </section>
@@ -192,48 +209,16 @@
             <div class="contact-wrapper glass-effect hidden-up">
                 <div class="contact-info">
                     <h3>Get In Touch</h3>
-                    <p>Expert financial advice is just a call away.</p>
-                    
-                    <div class="info-item">
-                        <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Visit Us</h4>
-                            <p>#210B, Urban Vatika,<br>Zirakpur, SAS Nagar,<br>Punjab 140603</p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-item">
-                        <div class="c-icon"><i class="fas fa-phone-alt"></i></div>
-                        <div>
-                            <h4>Call Us</h4>
-                            <p><a href="tel:9988065069">99880 65069</a></p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="c-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email Us</h4>
-                            <p><a href="mailto:radhekrishnafinancialhub@gmail.com" style="word-break: break-all;">radhekrishnafinancialhub@gmail.com</a></p>
-                        </div>
-                    </div>
+                    <div class="info-item"><div class="c-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Visit Us</h4><p>#210B, Urban Vatika, Zirakpur</p></div></div>
+                    <div class="info-item"><div class="c-icon"><i class="fas fa-phone-alt"></i></div><div><h4>Call Us</h4><p><a href="tel:9988065069">99880 65069</a></p></div></div>
+                    <div class="info-item"><div class="c-icon"><i class="fas fa-envelope"></i></div><div><h4>Email Us</h4><p>radhekrishnafinancialhub@gmail.com</p></div></div>
                 </div>
-
                 <div class="contact-form-box">
                     <h3>Request Call Back</h3>
                     <form id="contactForm">
-                        <div class="input-group-modern">
-                            <input type="text" id="c-name" required placeholder=" ">
-                            <label for="c-name">Your Name</label>
-                        </div>
-                        <div class="input-group-modern">
-                            <input type="tel" id="c-mobile" required placeholder=" ">
-                            <label for="c-mobile">Mobile Number</label>
-                        </div>
-                        <div class="input-group-modern">
-                            <input type="email" id="c-email" required placeholder=" ">
-                            <label for="c-email">Email Address</label>
-                        </div>
+                        <div class="input-group-modern"><input type="text" id="c-name" required placeholder=" "><label>Your Name</label></div>
+                        <div class="input-group-modern"><input type="tel" id="c-mobile" required placeholder=" "><label>Mobile Number</label></div>
+                        <div class="input-group-modern"><input type="email" id="c-email" required placeholder=" "><label>Email Address</label></div>
                         <button type="submit" class="btn-primary full-width ripple shine-effect">Submit Request</button>
                     </form>
                 </div>
@@ -244,26 +229,10 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>Radhe Krishna Financial Hub</h3>
-                    <p style="margin-bottom: 2px;"><strong>Ashok Kumar Goyal</strong></p>
-                    <p>AMFI Registered Mutual Fund Distributor.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <p>Urban Vatika, Zirakpur</p>
-                    <p>99880 65069</p>
-                    <p>radhekrishnafinancialhub@gmail.com</p>
-                </div>
+                <div class="footer-col"><h3>Radhe Krishna Financial Hub</h3><p><strong>Ashok Kumar Goyal</strong></p><p>AMFI Registered Mutual Fund Distributor.</p></div>
+                <div class="footer-col"><h3>Contact</h3><p>Urban Vatika, Zirakpur</p><p>99880 65069</p></div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2026 Radhe Krishna Financial Hub. All Rights Reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>© 2026 Radhe Krishna Financial Hub. All Rights Reserved.</p></div>
         </div>
     </footer>
 
