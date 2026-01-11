@@ -12,7 +12,7 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     mobileMenu.classList.remove('active');
 }));
 
-// --- 2. Chart & Calculator ---
+// --- 2. Chart & Calculator (Main Header) ---
 let mode = 'sip';
 let myChart = null;
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -92,7 +92,37 @@ function calculate() {
     updateChart(invested, profit);
 }
 
-// --- 3. Animations: Typewriter, Counter ---
+// --- 3. Goal Based Calculator (Panel) ---
+function calculateGoalSIP() {
+    const goalAmt = parseFloat(document.getElementById('goalAmount').value) || 0;
+    const years = parseFloat(document.getElementById('goalYears').value) || 0;
+    const salary = parseFloat(document.getElementById('userSalary').value) || 0;
+    
+    const annualRate = 12;
+    const i = (annualRate / 100) / 12;
+    const n = years * 12;
+
+    if(goalAmt > 0 && years > 0) {
+        const requiredSIP = goalAmt / (((Math.pow(1 + i, n) - 1) / i) * (1 + i));
+        
+        const totalInvested = requiredSIP * n;
+        const totalGain = goalAmt - totalInvested;
+
+        document.getElementById('requiredSIP').innerText = '₹ ' + Math.round(requiredSIP).toLocaleString('en-IN');
+        document.getElementById('goalTotalInvested').innerText = '₹ ' + Math.round(totalInvested).toLocaleString('en-IN');
+        document.getElementById('goalGain').innerText = '₹ ' + Math.round(totalGain).toLocaleString('en-IN');
+        document.getElementById('goalFinal').innerText = '₹ ' + goalAmt.toLocaleString('en-IN');
+
+        const warning = document.getElementById('salaryWarning');
+        if (salary > 0 && requiredSIP > (salary * 0.5)) {
+            warning.style.display = 'block';
+        } else {
+            warning.style.display = 'none';
+        }
+    }
+}
+
+// --- 4. Animations: Typewriter, Counter ---
 const typeElement = document.querySelector('.typewriter-text');
 const textToType = typeElement.getAttribute('data-text');
 let typeIndex = 0;
@@ -109,7 +139,6 @@ function startCounter(el) {
     const target = +el.getAttribute('data-target');
     const suffix = el.getAttribute('data-suffix') || "+";
     let count = 0;
-    // Set speed proportional to target for rapid completion (approx 1.5 seconds)
     const increment = target / 60; 
 
     const updateCount = () => {
@@ -124,12 +153,11 @@ function startCounter(el) {
     updateCount();
 }
 
-// --- 4. Particle Background ---
+// --- 5. Particle Background ---
 const canvas = document.getElementById('particle-canvas');
 const c = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 let particlesArray;
 
 class Particle {
@@ -157,9 +185,7 @@ class Particle {
 
 function initParticles() {
     particlesArray = [];
-    for(let i=0; i<50; i++) {
-        particlesArray.push(new Particle());
-    }
+    for(let i=0; i<50; i++) { particlesArray.push(new Particle()); }
 }
 
 function animateParticles() {
@@ -171,15 +197,13 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-// --- Init & Observers ---
+// --- Init & Event Listeners ---
 window.onload = () => {
     initChart();
     calculate();
     setTimeout(typeWriter, 500);
     initParticles();
     animateParticles();
-    
-    // Start counters immediately on load
     document.querySelectorAll('.counter').forEach(el => startCounter(el));
 };
 
@@ -193,12 +217,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.hidden-up, .hidden-left, .hidden-right').forEach(el => observer.observe(el));
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    initParticles();
-});
-
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -210,17 +228,11 @@ window.addEventListener('scroll', () => {
 document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = e.target.querySelector('button');
-    const originalText = btn.innerText;
     btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
     btn.disabled = true;
     setTimeout(() => {
         btn.innerHTML = 'Message Sent <i class="fas fa-check"></i>';
         btn.style.background = '#28a745';
-        setTimeout(() => {
-            e.target.reset();
-            btn.innerHTML = originalText;
-            btn.style.background = '';
-            btn.disabled = false;
-        }, 2000);
+        setTimeout(() => { e.target.reset(); btn.disabled = false; }, 2000);
     }, 1500);
 });
