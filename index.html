@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Radhe Krishna Financial Hub | Mutual Funds & SIPs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="scroll-progress"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-chart-line"></i> Radhe Krishna <span>Hub</span>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#calculator" class="nav-link">Tools</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="btn-login ripple">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <canvas id="particle-canvas"></canvas>
+        
+        <div class="floating-icon icon-1"><i class="fas fa-rupee-sign"></i></div>
+        <div class="floating-icon icon-2"><i class="fas fa-chart-pie"></i></div>
+        <div class="floating-icon icon-3"><i class="fas fa-shield-alt"></i></div>
+
+        <div class="container hero-content">
+            <div class="hero-text hidden-left">
+                <h1>Investing made <br>
+                    <span class="typewriter-text" data-text="Fast, Easy, Paperless"></span>
+                    <span class="cursor">|</span>
+                </h1>
+                <p>One stop solution for all your Wealth Management needs. Track Mutual Funds, Equity Shares, Bonds, and Insurance in one place.</p>
+                <div class="hero-btns">
+                    <a href="#calculator" class="btn-primary ripple shine-effect">Start Investing</a>
+                    <a href="#" class="btn-secondary ripple"><i class="fab fa-google-play"></i> App</a>
+                </div>
+            </div>
+            
+            <div id="calculator" class="hero-card glass-effect hidden-right">
+                <div class="card-header">
+                    <h3>SIP / Lumpsum Calculator</h3>
+                    <div class="toggle-container">
+                        <button class="toggle-btn active" onclick="setMode('sip')">SIP</button>
+                        <button class="toggle-btn" onclick="setMode('lumpsum')">Lumpsum</button>
+                    </div>
+                </div>
+
+                <div class="calc-body">
+                    <div class="inputs">
+                        <div class="input-group">
+                            <label>Investment Amount (₹)</label>
+                            <div class="range-wrapper">
+                                <input type="range" id="investRange" min="500" max="100000" step="500" value="5000">
+                                <input type="number" id="investInput" value="5000">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Expected Return (P.A. %)</label>
+                            <div class="range-wrapper">
+                                <input type="range" id="rateRange" min="1" max="30" step="0.5" value="12">
+                                <input type="number" id="rateInput" value="12">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Time Period (Years)</label>
+                            <div class="range-wrapper">
+                                <input type="range" id="timeRange" min="1" max="30" step="1" value="10">
+                                <input type="number" id="timeInput" value="10">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-item">
+                        <small>Invested</small>
+                        <span id="investedAmount">₹ 6,00,000</span>
+                    </div>
+                    <div class="result-item">
+                        <small>Profit</small>
+                        <span id="estReturns" class="profit">₹ 5,61,695</span>
+                    </div>
+                    <div class="result-item total">
+                        <small>Total Value</small>
+                        <span id="totalValue">₹ 11,61,695</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-box hidden-up">
+                <i class="fas fa-users pulse-icon"></i>
+                <h2 class="counter" data-target="1500">0</h2>
+                <p>Happy Clients</p>
+            </div>
+            <div class="stat-box hidden-up" style="transition-delay: 0.2s;">
+                <i class="fas fa-briefcase pulse-icon"></i>
+                <h2 class="counter" data-target="40">0</h2>
+                <p>AMC Partners</p>
+            </div>
+            <div class="stat-box hidden-up" style="transition-delay: 0.4s;">
+                <i class="fas fa-rupee-sign pulse-icon"></i>
+                <h2 class="counter" data-target="500">0</h2>
+                <p>Cr+ AUM Managed</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <div class="section-title hidden-up">
+                <h2>Why Choose Us?</h2>
+                <p>We deliver best in class financial services tailored to your needs.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card hidden-up">
+                    <div class="icon-box"><i class="fas fa-bell"></i></div>
+                    <h3>Timely Reminders</h3>
+                    <p>Get timely reminders of all your important dates so you never miss a premium.</p>
+                </div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.1s;">
+                    <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Secure Environment</h3>
+                    <p>Bank grade security for all your financial transactions and data privacy.</p>
+                </div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.2s;">
+                    <div class="icon-box"><i class="fas fa-users"></i></div>
+                    <h3>Family Account</h3>
+                    <p>One dashboard for all your family members to track investments together.</p>
+                </div>
+                <div class="feature-card hidden-up" style="transition-delay: 0.3s;">
+                    <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
+                    <h3>Consolidated View</h3>
+                    <p>View all investments, insurance, and external mutual funds in one report.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="contact-wrapper glass-effect hidden-up">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Expert financial advice is just a call away.</p>
+                    
+                    <div class="info-item">
+                        <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Visit Us</h4>
+                            <p>#210B, Urban Vatika,<br>Zirakpur, SAS Nagar,<br>Punjab 140603</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="c-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p><a href="tel:9988065069">99880 65069</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="c-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p><a href="mailto:radhekrishnafinancialhub@gmail.com" style="word-break: break-all;">radhekrishnafinancialhub@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-box">
+                    <h3>Request Call Back</h3>
+                    <form id="contactForm">
+                        <div class="input-group-modern">
+                            <input type="text" id="c-name" required placeholder=" ">
+                            <label for="c-name">Your Name</label>
+                        </div>
+                        <div class="input-group-modern">
+                            <input type="tel" id="c-mobile" required placeholder=" ">
+                            <label for="c-mobile">Mobile Number</label>
+                        </div>
+                        <div class="input-group-modern">
+                            <input type="email" id="c-email" required placeholder=" ">
+                            <label for="c-email">Email Address</label>
+                        </div>
+                        <button type="submit" class="btn-primary full-width ripple shine-effect">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Radhe Krishna Hub</h3>
+                    <p>AMFI Registered Mutual Fund Distributor.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>Urban Vatika, Zirakpur</p>
+                    <p>99880 65069</p>
+                    <p>radhekrishnafinancialhub@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Radhe Krishna Financial Hub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
