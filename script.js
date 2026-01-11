@@ -12,7 +12,6 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     mobileMenu.classList.remove('active');
 }));
 
-
 // --- 2. Chart & Calculator ---
 let mode = 'sip';
 let myChart = null;
@@ -93,8 +92,7 @@ function calculate() {
     updateChart(invested, profit);
 }
 
-
-// --- 3. Animations: Typewriter, Scroll, Counter ---
+// --- 3. Animations: Typewriter, Counter ---
 const typeElement = document.querySelector('.typewriter-text');
 const textToType = typeElement.getAttribute('data-text');
 let typeIndex = 0;
@@ -107,31 +105,24 @@ function typeWriter() {
     }
 }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            if(entry.target.classList.contains('counter')) startCounter(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.hidden-up, .hidden-left, .hidden-right').forEach(el => observer.observe(el));
-document.querySelectorAll('.counter').forEach(el => observer.observe(el.parentElement));
-
 function startCounter(el) {
     const target = +el.getAttribute('data-target');
+    const suffix = el.getAttribute('data-suffix') || "+";
+    let count = 0;
+    // Set speed proportional to target for rapid completion (approx 1.5 seconds)
+    const increment = target / 60; 
+
     const updateCount = () => {
-        const count = +el.innerText;
-        const speed = target / 40; 
-        if(count < target) {
-            el.innerText = Math.ceil(count + speed);
-            setTimeout(updateCount, 25);
-        } else el.innerText = target + "+";
+        if (count < target) {
+            count += increment;
+            el.innerText = Math.ceil(count);
+            requestAnimationFrame(updateCount);
+        } else {
+            el.innerText = target + suffix;
+        }
     };
     updateCount();
 }
-
 
 // --- 4. Particle Background ---
 const canvas = document.getElementById('particle-canvas');
@@ -180,15 +171,27 @@ function animateParticles() {
     requestAnimationFrame(animateParticles);
 }
 
-
-// --- Init ---
+// --- Init & Observers ---
 window.onload = () => {
     initChart();
     calculate();
     setTimeout(typeWriter, 500);
     initParticles();
     animateParticles();
+    
+    // Start counters immediately on load
+    document.querySelectorAll('.counter').forEach(el => startCounter(el));
 };
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.hidden-up, .hidden-left, .hidden-right').forEach(el => observer.observe(el));
 
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
@@ -196,7 +199,6 @@ window.addEventListener('resize', () => {
     initParticles();
 });
 
-// Scroll Progress
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -205,7 +207,6 @@ window.addEventListener('scroll', () => {
     document.querySelector('.scroll-progress').style.width = (winScroll / height) * 100 + "%";
 });
 
-// Form handling
 document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = e.target.querySelector('button');
